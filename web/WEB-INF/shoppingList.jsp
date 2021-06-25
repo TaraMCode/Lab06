@@ -7,10 +7,10 @@
     </head>
     <body>
         <h1>Shopping List</h1>
-       <label>Hello, ${user} <a href="login?logout">Log out</a></label>
-       <h1>List</h1>
-       <label>Add item:</label>
-       <input type="text" name="items">
-       <input type="submit" value="Add">
+        <label>Hello, ${username_attribute} <a href="register?logout">Log out</a></label>
+        <h1>List</h1>
+        <label>Add item:</label>
+        <input type="text" name="items">
+        <input type="submit" value="Add">
     </body>
 </html>

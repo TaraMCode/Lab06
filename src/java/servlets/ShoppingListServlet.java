@@ -22,34 +22,36 @@ public class ShoppingListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String action = request.getParameter("logout"); // gets the query string from login.jsp
-        if (action != null) { // if the logout button is clicked
+
+        String loggingout = request.getParameter("logout"); // gets the query string from shoppingList.jsp
+        if (loggingout != null) { // if the logout button is clicked
             HttpSession session = request.getSession(); // get the session
             session.invalidate(); // invalidate the session
-            request.setAttribute("message", "You have successfully logged out."); // return a message informing the user they've logged in
         }
-        
-        HttpSession session = request.getSession();
-                      
-         getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response); // always write this at the end of the doGet
+
+        getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response); // always write this at the end of the doGet
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String usernameString = request.getParameter("person_username");
 
-        // doPost() first validates that user name and password are not empty. 
-        if (usernameString == null || usernameString.equals("")) {
-            // response.sendRedirect("Hello");
-            request.setAttribute("message", "Invalid login.");
-            request.setAttribute("username_attribute", usernameString); // reloads username to boxes
-            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-            return;
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("register")) { // do this three more times - add, delete etc
+            String usernameString = request.getParameter("username");
+            // doPost() first validates that user name and password are not empty. 
+            if (usernameString == null || usernameString.equals("")) {
+                request.setAttribute("username", usernameString); // reloads username to boxes
+                getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+                return;
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("username_attribute", usernameString);
+                // response.sendRedirect("/WEB-INF/shoppingList.jsp"); // Can't redirect to a JSP, can only use forward
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            }
         }
-
-       getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        //getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 }
