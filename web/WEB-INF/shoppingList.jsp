@@ -9,7 +9,7 @@
     <body>
         <h1>Shopping List</h1>
 
-        <label>Hello, ${username_attribute} <a href="ShoppingList?logout">Log out</a></label>
+        <label>Hello, ${username_attribute} <a href="register?logout">Log out</a></label>
         <h1>List</h1>
         <form method="post" action="">
             <label>Add item:</label>

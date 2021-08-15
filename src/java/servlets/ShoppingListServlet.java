@@ -26,11 +26,12 @@ public class ShoppingListServlet extends HttpServlet {
         HttpSession session = request.getSession(); // get the session
 
         String loggingout = request.getParameter("logout"); // gets the query string from shoppingList.jsp
-        if (loggingout != null) { // if the logout button is clicked
-
-            session.invalidate(); // invalidate the session
+        
+       if (loggingout != null) { // if the logout button is clicked
+          session.invalidate(); // invalidate the session
         }
-        String username = (String) session.getAttribute("username_attribute");
+        
+       String username = (String) session.getAttribute("username_attribute");
 
         if (username != null) {
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
@@ -68,7 +69,6 @@ public class ShoppingListServlet extends HttpServlet {
             String addItemServlet = request.getParameter("item");
 
             ArrayList<String> list = (ArrayList<String>) session.getAttribute("shoppingListItem");
-            //    request.setAttribute("itemIsAdded", true);
             list.add(addItemServlet);
             session.setAttribute("shoppingListItem", list);
             response.sendRedirect("ShoppingList");

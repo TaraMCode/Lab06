@@ -14,5 +14,6 @@
         <input type="submit" value="Register name">
         <input type="hidden" name="action" value="register">
         </form>
+        <p>${message}</p>
     </body>
 </html>
